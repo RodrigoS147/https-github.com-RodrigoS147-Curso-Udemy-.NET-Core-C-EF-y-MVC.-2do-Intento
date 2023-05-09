@@ -21,5 +21,23 @@ namespace Turnos.Controllers
             return View(_context.Especialidad.ToList());
         }
 
+        public IActionResult Edit (int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var especialidad = _context.Especialidad.Find(id);
+
+            if (especialidad == null)
+            {
+                return NotFound();
+            }
+
+            return View(especialidad);
+        }
+
+        
     }
 }
