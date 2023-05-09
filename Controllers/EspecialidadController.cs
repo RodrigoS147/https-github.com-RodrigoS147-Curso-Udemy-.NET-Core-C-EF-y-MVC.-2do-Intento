@@ -38,6 +38,23 @@ namespace Turnos.Controllers
             return View(especialidad);
         }
 
-        
+
+        [HttpPost] 
+        public async Task<IActionResult> Edit(int id, [Bind("IdEspecialidad,Descripcion")] Especialidad especialidad)
+        {
+            if(id != especialidad.IdEspecialidad)
+            {
+                return NotFound();
+            }
+
+            if(ModelState.IsValid)
+            {
+                _context.Update(especialidad);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(especialidad);
+        }
+
     }
 }
