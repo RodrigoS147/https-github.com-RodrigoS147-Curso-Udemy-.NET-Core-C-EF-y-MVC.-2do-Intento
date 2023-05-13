@@ -68,3 +68,6 @@ C:\Turnos\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Securit
 C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Especialidad\Edit.cshtml.g.cs
 C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Especialidad\Create.cshtml.g.cs
 C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Especialidad\Delete.cshtml.g.cs
+C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Index.cshtml.g.cs
+C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Create.cshtml.g.cs
+C:\Turnos\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Details.cshtml.g.cs
