@@ -38,5 +38,21 @@ namespace Turnos.Controllers
             return View(paciente);
         }
 
+    public IActionResult Create(){
+        return  View();
+    }
+
+    public async Task <IActionResult> Create ([Bind("IdPaciente, Nombre, Apellido, Direccion, Telefono, Email")] Paciente paciente)
+    {
+        if(ModelState.IsValid){
+            _context.Add(paciente);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(paciente);
+
+    }
+    
     }
 }
