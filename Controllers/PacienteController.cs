@@ -42,17 +42,20 @@ namespace Turnos.Controllers
         return  View();
     }
 
-    public async Task <IActionResult> Create ([Bind("IdPaciente, Nombre, Apellido, Direccion, Telefono, Email")] Paciente paciente)
-    {
-        if(ModelState.IsValid){
-            _context.Add(paciente);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+     [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("IdPaciente,Nombre,Apellido,Direccion,Telefono,Email")] Paciente paciente)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(paciente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(paciente);
         }
 
-        return View(paciente);
 
-    }
      public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +86,39 @@ namespace Turnos.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(paciente);
+        }
+
+          public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var paciente = await _context.Paciente.FirstOrDefaultAsync(m => m.IdPaciente == id);
+            if (paciente == null)
+            {
+                return NotFound();
+            }
+            return View(paciente);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var paciente = await _context.Paciente.FindAsync(id);
+            if (paciente == null)
+            {
+                return NotFound();
+            }
+            _context.Paciente.Remove(paciente);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
         }
     
     }

@@ -66,6 +66,8 @@ namespace Turnos.Models
 
         }
 
+          public DbSet<Turnos.Models.Medico> Medico { get; set; }
+
     }
 
       
