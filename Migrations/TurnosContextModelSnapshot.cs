@@ -144,6 +144,44 @@ namespace Turnos.Migrations
                     b.ToTable("Paciente");
                 });
 
+            modelBuilder.Entity("Turnos.Models.Turno", b =>
+                {
+                    b.Property<int>("IdTurno")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FechaHoraFin")
+                        .HasColumnType("datetime2")
+                        .IsUnicode(false);
+
+                    b.Property<DateTime>("FechaHoraInicio")
+                        .HasColumnType("datetime2")
+                        .IsUnicode(false);
+
+                    b.Property<int>("IdMedico")
+                        .HasColumnType("int")
+                        .IsUnicode(false);
+
+                    b.Property<int>("IdPaciente")
+                        .HasColumnType("int")
+                        .IsUnicode(false);
+
+                    b.Property<int?>("MedicoIdMedico")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PacienteIdPaciente")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdTurno");
+
+                    b.HasIndex("MedicoIdMedico");
+
+                    b.HasIndex("PacienteIdPaciente");
+
+                    b.ToTable("Turno");
+                });
+
             modelBuilder.Entity("Turnos.Models.MedicoEspecialidad", b =>
                 {
                     b.HasOne("Turnos.Models.Especialidad", "Especialidad")
@@ -157,6 +195,17 @@ namespace Turnos.Migrations
                         .HasForeignKey("IdMedico")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Turnos.Models.Turno", b =>
+                {
+                    b.HasOne("Turnos.Models.Medico", "Medico")
+                        .WithMany("Turno")
+                        .HasForeignKey("MedicoIdMedico");
+
+                    b.HasOne("Turnos.Models.Paciente", "Paciente")
+                        .WithMany("Turno")
+                        .HasForeignKey("PacienteIdPaciente");
                 });
 #pragma warning restore 612, 618
         }

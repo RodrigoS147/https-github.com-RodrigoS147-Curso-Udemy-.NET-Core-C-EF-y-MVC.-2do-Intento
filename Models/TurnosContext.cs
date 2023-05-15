@@ -18,6 +18,8 @@ namespace Turnos.Models
 
         public DbSet<Medico> Medico { get; set; }
 
+        public DbSet<Turno> Turno { get; set; }
+
         public DbSet<MedicoEspecialidad> MedicoEspecialidad { get; set; }
 
           protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -108,7 +110,33 @@ namespace Turnos.Models
             .IsUnicode(false);
         });
 
-         modelBuilder.Entity<MedicoEspecialidad>().HasKey(x => new { x.IdMedico, x.IdEspecialidad });
+
+        modelBuilder.Entity<Turno>(entidad =>
+        {
+            entidad.ToTable("Turno");
+
+            entidad.HasKey(m => m.IdTurno);
+
+            entidad.Property(m => m.IdPaciente)
+            .IsRequired()
+            .IsUnicode(false);
+
+            entidad.Property(m => m.IdMedico)
+            .IsRequired()
+            .IsUnicode(false);
+
+            entidad.Property(m => m.FechaHoraInicio)
+            .IsRequired()
+            .IsUnicode(false);
+
+            entidad.Property(m => m.FechaHoraFin)
+            .IsRequired()
+            .IsUnicode(false);
+            
+        });
+
+
+        modelBuilder.Entity<MedicoEspecialidad>().HasKey(x => new { x.IdMedico, x.IdEspecialidad });
 
         modelBuilder.Entity<MedicoEspecialidad>().HasOne(x => x.Medico)
         .WithMany(p => p.MedicoEspecialidad)
