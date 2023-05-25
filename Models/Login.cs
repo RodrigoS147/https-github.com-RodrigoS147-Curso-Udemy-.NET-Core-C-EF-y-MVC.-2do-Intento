@@ -8,7 +8,7 @@ namespace Turnos.Models
         [Key]   
         public int LoginId { get; set; }
         [Required (ErrorMessage = "Debe ingresar un usuario")]
-        [Display (Prompt = "Ingrese una descrpción")]                
+        [Display (Prompt = "Ingrese nombre de usuario")]                
         public string Usuario { get; set; }
         [Required (ErrorMessage = "Debe ingresar una contraseña")]               
         public string Password { get; set; }
